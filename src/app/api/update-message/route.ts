@@ -1,13 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import db from "@/lib/db";
 import { pusher } from "@/lib/pusher";
 
-export async function PUT(
-  req: Request,
-  { params }: { params: { messageId: string } }
-) {
+export async function PUT(req: NextRequest) {
   try {
-    const { messageId } = params;
+    const { messageId } = await req.json(); // Access params from the request body
     const body = await req.json();
     console.log("Received update request:", body); // ✅ Debugging
 
